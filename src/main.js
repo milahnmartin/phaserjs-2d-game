@@ -31,7 +31,7 @@ let treasure;
 let bushes;
 let cursors;
 let startText;
-let gameStarted = false; // Define gameStarted here
+let gameStarted = false;
 
 function preload() {
   this.load.image('background', 'assets/game_background.png');
@@ -87,14 +87,14 @@ function create() {
     .setScale(0.2)
     .setInteractive();
 
-  this.input.on('pointerdown', function (pointer) {
+  this.input.on('pointerdown', function () {
     if (!gameStarted) {
       startGame();
     }
     player.setVelocityX(300);
   });
 
-  this.input.on('pointerup', function (pointer) {
+  this.input.on('pointerup', function () {
     player.setVelocityX(0);
   });
 
@@ -105,7 +105,7 @@ function create() {
     setScale: { x: 0.1, y: 0.1 },
   });
 
-  treasure = this.physics.add.sprite(width - 50, height - 150, 'treasure').setScale(0.1); // Smaller chest
+  treasure = this.physics.add.sprite(width - 50, height - 150, 'treasure').setScale(0.1);
 
   this.physics.add.collider(player, platforms);
   this.physics.add.collider(dogs, platforms);
@@ -115,7 +115,6 @@ function create() {
 
   cursors = this.input.activePointer;
 
-  // Display start text
   startText = this.add.text(width / 2, height / 2, 'CLICK the SCREEN TO BEGIN', {
     fontSize: '32px',
     fill: '#000',
@@ -137,7 +136,7 @@ function update() {
   }
 }
 
-function hitDog(player, dog) {
+function hitDog() {
   shakeCamera.call(this);
   this.cameras.main.fadeOut(500, 255, 255, 255);
   this.cameras.main.once(
@@ -153,7 +152,7 @@ function shakeCamera() {
   this.cameras.main.shake(500);
 }
 
-function collectTreasure(player, treasure) {
+function collectTreasure() {
   alert('You found the treasure!');
   restartGame.call(this);
 }
